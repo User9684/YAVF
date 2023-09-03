@@ -21,10 +21,12 @@ import "./styles.css";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
-import { useProfilePronouns } from "./api";
+import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
 import PronounsAboutComponent from "./components/PronounsAboutComponent";
 import { CompactPronounsChatComponentWrapper, PronounsChatComponentWrapper } from "./components/PronounsChatComponent";
 import { settings } from "./settings";
+import { UserContextMenuPatch } from "./components/ContextMenu";
+import { useProfilePronouns } from "./api";
 
 export default definePlugin({
     name: "PronounDB",
@@ -74,5 +76,13 @@ export default definePlugin({
     // Re-export the components on the plugin object so it is easily accessible in patches
     PronounsChatComponentWrapper,
     CompactPronounsChatComponentWrapper,
-    useProfilePronouns
+    useProfilePronouns,
+
+    start() {
+        addContextMenuPatch("user-context", UserContextMenuPatch);
+    },
+
+    stop() {
+        removeContextMenuPatch("user-context", UserContextMenuPatch);
+    },
 });
