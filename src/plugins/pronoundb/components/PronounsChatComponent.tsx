@@ -36,6 +36,8 @@ function shouldShow(message: Message): boolean {
         return false;
     if (!settings.store.showSelf && message.author.id === UserStore.getCurrentUser().id)
         return false;
+    if (settings.store.ignoreUsers.includes(message.author.id))
+        return false;
 
     return true;
 }
