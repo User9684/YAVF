@@ -41,7 +41,8 @@ const ContributorBadge: ProfileBadge = {
             transform: "scale(0.9)" // The image is a bit too big compared to default badges
         }
     },
-    shouldShow: ({ user }) => isPluginDev(user.id),
+    //shouldShow: ({ user }) => isPluginDev(user.id),
+    shouldShow: ({ }) => false,
     link: "https://github.com/Vendicated/Vencord"
 };
 
@@ -62,11 +63,12 @@ async function loadBadges(noCache = false) {
         new Logger("BadgeAPI").error("Invalid badges.csv file!");
         return;
     }
-
+    /*
     for (const line of lines) {
         const [id, description, image] = line.split(",");
         (DonorBadges[id] ??= []).push({ image, description });
     }
+    */
 }
 
 export default definePlugin({
