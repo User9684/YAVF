@@ -53,18 +53,20 @@ interface PluginModalProps extends ModalProps {
 }
 
 function makeDummyUser(user: { username: string; id?: string; avatar?: string; }) {
-    const newUser = new UserRecord({
+    /*const newUser = new UserRecord({
         username: user.username,
         id: user.id ?? generateId(),
         avatar: user.avatar,
-        /** To stop discord making unwanted requests... */
+        // To stop discord making unwanted requests...
         bot: true,
     });
     FluxDispatcher.dispatch({
         type: "USER_UPDATE",
         user: newUser,
     });
-    return newUser;
+    return newUser;*/
+
+    return user;
 }
 
 const Components: Record<OptionType, React.ComponentType<ISettingElementProps<any>>> = {
