@@ -31,16 +31,6 @@ import definePlugin from "@utils/types";
 import { Forms, Toasts, UserStore } from "@webpack/common";
 import { User } from "discord-types/general";
 
-const CONTRIBUTOR_BADGE = "https://vencord.dev/assets/favicon.png";
-
-const ContributorBadge: ProfileBadge = {
-    description: "Vencord Contributor",
-    image: CONTRIBUTOR_BADGE,
-    position: BadgePosition.START,
-    shouldShow: ({ userId }) => isPluginDev(userId),
-    onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
-};
-
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
 async function loadBadges(noCache = false) {
@@ -102,7 +92,6 @@ export default definePlugin({
     },
 
     async start() {
-        Vencord.Api.Badges.addBadge(ContributorBadge);
         await loadBadges();
     },
 
