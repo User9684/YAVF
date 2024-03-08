@@ -21,15 +21,14 @@ import DonateButton from "@components/DonateButton";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
-import { openContributorModal } from "@components/PluginSettings/ContributorModal";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isPluginDev } from "@utils/misc";
 import { closeModal, Modals, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { Forms, Toasts, UserStore } from "@webpack/common";
 import { User } from "discord-types/general";
+import { Forms, Toasts } from "@webpack/common";
+
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
@@ -39,10 +38,6 @@ async function loadBadges(noCache = false) {
     const init = {} as RequestInit;
     if (noCache)
         init.cache = "no-cache";
-    /*
-    DonorBadges = await fetch("https://badges.vencord.dev/badges.json", init)
-        .then(r => r.json());
-    */
 }
 
 export default definePlugin({
