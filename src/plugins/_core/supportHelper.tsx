@@ -171,6 +171,7 @@ export default definePlugin({
 
     flux: {
         async CHANNEL_SELECT({ channelId }) {
+            /*
             if (channelId !== SUPPORT_CHANNEL_ID) return;
 
             const selfId = UserStore.getCurrentUser()?.id;
@@ -232,6 +233,7 @@ export default definePlugin({
                     onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
                 });
             }
+            */
         }
     },
 
