@@ -26,7 +26,6 @@ import { Heart } from "@components/Heart";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isPluginDev } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { User } from "discord-types/general";
@@ -88,8 +87,6 @@ export default definePlugin({
             });
         }
     },
-
-    userProfileBadge: ContributorBadge,
 
     async start() {
         await loadBadges();
