@@ -37,7 +37,6 @@ interface PluginData {
     dependencies: string[];
     hasPatches: boolean;
     hasCommands: boolean;
-    required: boolean;
     enabledByDefault: boolean;
     target: "discordDesktop" | "vesktop" | "desktop" | "web" | "dev";
     filePath: string;
@@ -110,7 +109,6 @@ async function parseFile(fileName: string) {
             hasPatches: false,
             hasCommands: false,
             enabledByDefault: false,
-            required: false,
             tags: [] as string[]
         } as PluginData;
 

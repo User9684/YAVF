@@ -53,7 +53,6 @@ const settings = Settings.plugins;
 
 export function isPluginEnabled(p: string) {
     return (
-        Plugins[p]?.required ||
         Plugins[p]?.isDependency ||
         settings[p]?.enabled
     ) ?? false;

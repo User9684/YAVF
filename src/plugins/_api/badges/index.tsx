@@ -46,7 +46,6 @@ export default definePlugin({
     name: "BadgeAPI",
     description: "API to add badges to users.",
     authors: [Devs.Megu, Devs.Ven, Devs.TheSun],
-    required: true,
     patches: [
         {
             find: ".FULL_SIZE]:26",

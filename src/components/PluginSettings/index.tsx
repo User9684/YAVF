@@ -293,10 +293,10 @@ export default function PluginSettings() {
 
         if (!pluginFilter(p)) continue;
 
-        const isRequired = p.required || p.isDependency || depMap[p.name]?.some(d => settings.plugins[d].enabled);
+        const isRequired = p.isDependency || depMap[p.name]?.some(d => settings.plugins[d].enabled);
 
         if (isRequired) {
-            const tooltipText = p.required || !depMap[p.name]
+            const tooltipText = !depMap[p.name]
                 ? "This plugin is required for Vencord to function."
                 : makeDependencyList(depMap[p.name]?.filter(d => settings.plugins[d].enabled));
 
@@ -367,19 +367,6 @@ export default function PluginSettings() {
                 )
                 : <ExcludedPluginsList search={search} />
             }
-
-
-            <Forms.FormDivider className={Margins.top20} />
-
-            <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
-                Required Plugins
-            </Forms.FormTitle>
-            <div className={cl("grid")}>
-                {requiredPlugins.length
-                    ? requiredPlugins
-                    : <Text variant="text-md/normal">No plugins meet the search criteria.</Text>
-                }
-            </div>
         </SettingsTab >
     );
 }

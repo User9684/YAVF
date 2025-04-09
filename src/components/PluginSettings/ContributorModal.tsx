@@ -56,8 +56,7 @@ function ContributorModal({ user }: { user: User; }) {
             : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
 
         return pluginsByAuthor
-            .filter(p => !p.name.endsWith("API"))
-            .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false));
+            .filter(p => !p.name.endsWith("API"));
     }, [user.id, user.username]);
 
     const ContributedHyperLink = <Link href="https://vencord.dev/source">contributed</Link>;
@@ -104,7 +103,7 @@ function ContributorModal({ user }: { user: User; }) {
                         <PluginCard
                             key={p.name}
                             plugin={p}
-                            disabled={p.required ?? false}
+                            disabled={false}
                             onRestartNeeded={() => showToast("Restart to apply changes!")}
                         />
                     )}
