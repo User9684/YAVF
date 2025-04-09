@@ -231,7 +231,6 @@ export default definePlugin({
                     onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
                 });
             }
-            */;
         }
     },
 
