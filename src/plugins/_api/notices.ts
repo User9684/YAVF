@@ -23,7 +23,6 @@ export default definePlugin({
     name: "NoticesAPI",
     description: "Fixes notices being automatically dismissed",
     authors: [Devs.Ven],
-    required: true,
     patches: [
         {
             find: '"NoticeStore"',

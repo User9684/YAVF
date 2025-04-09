@@ -11,7 +11,6 @@ export default definePlugin({
     name: "DisableDeepLinks",
     description: "Disables Discord stupid DeepLinks experiment which makes the app unusable",
     authors: [Devs.Ven],
-    required: true,
 
     patches: [{
         find: "2025-03_desktop_deeplinks",
