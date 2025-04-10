@@ -22,6 +22,7 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "ContextMenuAPI",
     description: "API for adding/removing items to/from context menus.",
+    dependencies: ["MenuItemDemanglerAPI"],
     authors: [Devs.Nuckyz, Devs.Ven, Devs.Kyuuhachi],
 
     patches: [
