@@ -11,20 +11,8 @@ const logger = new Logger("AutoDelete");
 const settings = definePluginSettings({
     isEnabled: {
         type: OptionType.BOOLEAN,
-        description: "Should auto delete be enabled? (disabling will cancel all queued deletions)",
+        description: "Should auto delete be enabled?",
         default: false,
-        onChange: function () {
-            if (settings.store.isEnabled) {
-                return;
-            }
-
-            for (const ind in timeouts) {
-                const timeoutId = timeouts[ind];
-                clearTimeout(timeoutId);
-            }
-
-            timeouts.clear();
-        }
     },
     deleteTimer: {
         type: OptionType.NUMBER,
@@ -40,8 +28,19 @@ const AutoDeleteToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={isEnabled ? "Disable Auto Delete" : "Enable Auto Delete"}
-            onClick={() => settings.store.isEnabled = !settings.store.isEnabled}
+            tooltip={isEnabled ? "Disable Auto Delete (shift to clear)" : "Enable Auto Delete"}
+            onClick={(e) => {
+                if (e.shiftKey && settings.store.isEnabled) {
+                    logger.info("Clearing deletion timeouts");
+                    timeouts.forEach(function (timeoutId) {
+                        clearTimeout(timeoutId);
+                    });
+
+                    timeouts.clear();
+                }
+
+                settings.store.isEnabled = !settings.store.isEnabled;
+            }}
         >
             <svg
                 width="20"
@@ -83,10 +82,6 @@ export default definePlugin({
             }
 
             const timeout = setTimeout(() => {
-                if (!settings.store.isEnabled) {
-                    return;
-                }
-
                 logger.info(`Deleting message https://discord.com/channels/${guildId}/${channelId}/${messageId}`);
                 MessageActions.deleteMessage(channelId, messageId);
 
