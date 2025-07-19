@@ -28,8 +28,8 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { User } from "discord-types/general";
-import { Forms, Toasts } from "@webpack/common";
+import { User } from "@vencord/discord-types";
+import { Forms, Toasts, UserStore } from "@webpack/common";
 
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
