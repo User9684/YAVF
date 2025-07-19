@@ -131,14 +131,6 @@ export default definePlugin({
 
     settings,
 
-    patches: [{
-        find: "#{intl::BEGINNING_DM}",
-        replacement: {
-            match: /#{intl::BEGINNING_DM},{.+?}\),(?=.{0,300}(\i)\.isMultiUserDM)/,
-            replace: "$& $self.renderContributorDmWarningCard({ channel: $1 }),"
-        }
-    }],
-
     commands: [
         {
             name: "vencord-debug",
@@ -282,19 +274,4 @@ export default definePlugin({
             ? <Flex>{buttons}</Flex>
             : null;
     },
-
-    renderContributorDmWarningCard: ErrorBoundary.wrap(({ channel }) => {
-        const userId = channel.getRecipientId();
-        if (!isPluginDev(userId)) return null;
-        if (RelationshipStore.isFriend(userId) || isPluginDev(UserStore.getCurrentUser()?.id)) return null;
-
-        return (
-            <Card className={`vc-warning-card ${Margins.top8}`}>
-                Please do not private message Vencord plugin developers for support!
-                <br />
-                Instead, use the Vencord support channel: {Parser.parse("https://discord.com/channels/1015060230222131221/1026515880080842772")}
-                {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}
-            </Card>
-        );
-    }, { noop: true }),
 });
