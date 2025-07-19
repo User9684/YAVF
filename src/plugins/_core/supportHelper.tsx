@@ -43,21 +43,9 @@ import SettingsPlugin from "./settings";
 
 const CodeBlockRe = /```js\n(.+?)```/s;
 
-const AdditionalAllowedChannelIds = [
-    "1024286218801926184", // Vencord > #bot-spam
-];
-
-const TrustedRolesIds = [
-    CONTRIB_ROLE_ID, // contributor
-    REGULAR_ROLE_ID, // regular
-    DONOR_ROLE_ID, // donor
-];
-
 const AsyncFunction = async function () { }.constructor;
 
 const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
-
-const isSupportAllowedChannel = (channel: Channel) => channel.parent_id === SUPPORT_CATEGORY_ID || AdditionalAllowedChannelIds.includes(channel.id);
 
 async function forceUpdate() {
     const outdated = await checkForUpdates();
@@ -155,13 +143,13 @@ export default definePlugin({
         {
             name: "vencord-debug",
             description: "Send Vencord debug info",
-            predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || isSupportAllowedChannel(ctx.channel),
+            predicate: ctx => true,
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
             name: "vencord-plugins",
             description: "Send Vencord plugin list",
-            predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || isSupportAllowedChannel(ctx.channel),
+            predicate: ctx => true,
             execute: () => ({ content: generatePluginList() })
         }
     ],
@@ -193,22 +181,6 @@ export default definePlugin({
                         secondaryConfirmText: "I know what I'm doing or I can't update"
                     });
                 }
-            }
-
-            const roles = GuildMemberStore.getSelfMember(VENCORD_GUILD_ID)?.roles;
-            if (!roles || TrustedRolesIds.some(id => roles.includes(id))) return;
-
-            if (!IS_WEB && IS_UPDATER_DISABLED) {
-                return Alerts.show({
-                    title: "Hold on!",
-                    body: <div>
-                        <Forms.FormText>You are using an externally updated Vencord version, which we do not provide support for!</Forms.FormText>
-                        <Forms.FormText className={Margins.top8}>
-                            Please either switch to an <Link href="https://vencord.dev/download">officially supported version of Vencord</Link>, or
-                            contact your package maintainer for support instead.
-                        </Forms.FormText>
-                    </div>
-                });
             }
 
             if (!IS_STANDALONE && !settings.store.dismissedDevBuildWarning) {
