@@ -53,11 +53,11 @@ function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
                     action={() => copyWithToast(badge.description!)}
                 />
             )}
-            {badge.image && (
+            {badge.iconSrc && (
                 <Menu.MenuItem
                     id="vc-badge-copy-link"
                     label="Copy Badge Image Link"
-                    action={() => copyWithToast(badge.image!)}
+                    action={() => copyWithToast(badge.iconSrc!)}
                 />
             )}
         </Menu.Menu>
@@ -80,8 +80,8 @@ export default definePlugin({
             find: "#{intl::PROFILE_USER_BADGES}",
             replacement: [
                 {
-                    match: /(alt:" ","aria-hidden":!0,src:)(.+?)(?=,)(?<=href:(\i)\.link.+?)/,
-                    replace: (_, rest, originalSrc, badge) => `...${badge}.props,${rest}${badge}.image??(${originalSrc})`
+                    match: /alt:" ","aria-hidden":!0,src:.{0,50}(\i).iconSrc/,
+                    replace: "...$1.props,$&"
                 },
                 {
                     match: /(?<="aria-label":(\i)\.description,.{0,200})children:/,
