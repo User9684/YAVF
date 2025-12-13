@@ -23,9 +23,10 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import { Devs } from "@utils/constants";
+import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { copyWithToast, shouldShowContributorBadge } from "@utils/misc";
+import { shouldShowContributorBadge } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { User } from "@vencord/discord-types";
@@ -84,7 +85,7 @@ export default definePlugin({
                     replace: "...$1.props,$&"
                 },
                 {
-                    match: /(?<="aria-label":(\i)\.description,.{0,200})children:/,
+                    match: /(?<="aria-label":(\i)\.description,.{0,200}?)children:/g,
                     replace: "children:$1.component?$self.renderBadgeComponent({...$1}) :"
                 },
                 // handle onClick and onContextMenu

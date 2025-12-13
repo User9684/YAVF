@@ -20,7 +20,7 @@ import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
-import { FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "@components/index";
+import { FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "@components/Icons";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
@@ -126,7 +126,7 @@ function VencordSettings() {
     const needsVibrancySettings = IS_DISCORD_DESKTOP && IS_MAC;
 
     return (
-        <SettingsTab title="Vencord Settings">
+        <SettingsTab>
             <section>
                 <Forms.FormTitle tag="h5">Quick Actions</Forms.FormTitle>
 
