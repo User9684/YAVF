@@ -1,18 +1,3 @@
-.vc-donate-button {
-    overflow: visible !important;
-}
-
-.vc-donate-button .vc-heart-icon {
-    transition: transform 0.3s;
-    margin-right: 0.5em;
-}
-
-.vc-donate-button:hover .vc-heart-icon {
-    transform: scale(1.1);
-    z-index: 10;
-    position: relative;
-}
-
 .vc-special-card-special {
     padding: 1em 1.5em;
     margin-bottom: 1em;
