@@ -33,6 +33,7 @@ interface PluginData {
     name: string;
     description: string;
     tags: string[];
+    searchTerms: string[];
     authors: Dev[];
     dependencies: string[];
     hasPatches: boolean;
@@ -109,7 +110,9 @@ async function parseFile(fileName: string) {
             hasPatches: false,
             hasCommands: false,
             enabledByDefault: false,
-            tags: [] as string[]
+            required: false,
+            tags: [] as string[],
+            searchTerms: [] as string[],
         } as PluginData;
 
         for (const prop of pluginObj.properties) {
@@ -138,9 +141,10 @@ async function parseFile(fileName: string) {
                     });
                     break;
                 case "tags":
-                    if (!isArrayLiteralExpression(value)) throw fail("tags is not an array literal");
-                    data.tags = value.elements.map(e => {
-                        if (!isStringLiteral(e)) throw fail("tags array contains non-string literals");
+                case "searchTerms":
+                    if (!isArrayLiteralExpression(value)) throw fail(`${key} is not an array literal`);
+                    data[key] = value.elements.map(e => {
+                        if (!isStringLiteral(e)) throw fail(`${key} array contains non-string literals`);
                         return e.text;
                     });
                     break;
