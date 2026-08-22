@@ -39,7 +39,7 @@ interface PluginData {
     hasPatches: boolean;
     hasCommands: boolean;
     enabledByDefault: boolean;
-    target: "discordDesktop" | "vesktop" | "desktop" | "web" | "dev";
+    target: "discordDesktop" | "vesktop" | "desktop" | "web" | "browser" | "dev";
     filePath: string;
 }
 
@@ -165,7 +165,7 @@ async function parseFile(fileName: string) {
 
         const target = getPluginTarget(fileName);
         if (target) {
-            if (!["web", "discordDesktop", "vesktop", "desktop", "dev"].includes(target)) throw fail(`invalid target ${target}`);
+            if (!["web", "browser", "discordDesktop", "vesktop", "desktop", "dev"].includes(target)) throw fail(`invalid target ${target}`);
             data.target = target as any;
         }
 
