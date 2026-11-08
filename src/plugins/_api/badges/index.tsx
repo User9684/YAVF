@@ -24,7 +24,6 @@ import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import { CopyIcon, LinkIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
-import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { Text } from "@components/Text";
 import { Devs } from "@utils/constants";
